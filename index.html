@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Oveggo</title>
+    <link rel="icon" type="image/x-icon" href="images/branding/favicon.ico">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> -->
+     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="slider.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+               <a href="index.html" >
+                        <img src="images/branding/logo3.svg" alt="Oveggo" width="150" height="50">
+                    </a>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Acceuil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about-us">À Propos</a></li>
+                    <li><a href="#contact-us">Contact</a></li>
+                    <li><a href="booking.html" class="book-now">Réservez</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+            <!-- Ajoutez cette section après le header existant -->
+        <div class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="index.html">Acceuil</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about-us">À Propos</a></li>
+                <li><a href="#contact-us">Contact</a></li>
+                <li><a href="booking.html" class="book-now">Réservez</a></li>
+            </ul>
+        </div>
+
+    <!-- Hero Slider Section -->
+    <section class="hero-slider">
+        <div class="slides-container">
+            <!-- Slide 1 -->
+            <div class="slide slide-1">
+                <div class="slide-content">
+                    <h1>Transformez Votre Jardin avec Oveggo</h1>
+                    <p>Créer des paysages magnifiques adaptés à votre vision.</p>
+                    <a href="booking.html" class="btn">Consultation gratuit</a>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide slide-2">
+                <div class="slide-content">
+                    <h1>Expert Garden Design & Maintenance</h1>
+                    <p>Our skilled team creates and maintains stunning gardens that thrive through every season. We combine artistic vision with horticultural expertise for exceptional results.</p>
+                    <a href="booking.html" class="btn">Consultation gratuit</a>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide slide-3">
+                <div class="slide-content">
+                    <h1>Transforming Outdoor Living</h1>
+                    <p>Create the outdoor oasis you've always dreamed of with our comprehensive landscaping services. From concept to completion, we deliver excellence.</p>
+                    <a href="booking.html" class="btn">Consultation gratuit</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slider Navigation -->
+        <button class="slider-arrow prev" aria-label="Previous slide">&#10094;</button>
+        <button class="slider-arrow next" aria-label="Next slide">&#10095;</button>
+        
+        <div class="slider-nav">
+            <span class="slider-dot active" data-slide="0" aria-label="Go to slide 1"></span>
+            <span class="slider-dot" data-slide="1" aria-label="Go to slide 2"></span>
+            <span class="slider-dot" data-slide="2" aria-label="Go to slide 3"></span>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <h2>Nos Services</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <img src="images/services/service-gardening.jpg" alt="Professional gardening services" loading="lazy">
+                <h3>Aménagement paysager</h3>
+                <p>De l'entretien de la pelouse à la refonte complète du jardin.</p>
+            </div>
+            <div class="service-item">
+                <img src="images/services/service-cleaning.jpg" alt="Outdoor cleaning services" loading="lazy">
+                <h3>Nettoyage</h3>
+                <p>Services de nettoyage extérieur professionnels pour terrasses, allées et mobilier de jardin.</p>
+            </div>
+            <div class="service-item">
+                <img src="images/services/service-agriculture.jpg" alt="Agricultural services" loading="lazy">
+                <h3>Agriculture</h3>
+                <p>Conseil et soutien pour les projets d'agriculture urbaine et les initiatives agricoles.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about-us" class="about-section">
+        <div class="image-half">
+            <img src="images/about/about-team.jpg" 
+                 srcset="images/about/about-team-2x.jpg 2x"
+                 alt="Oveggo professional gardening team working on landscape design" 
+                 loading="lazy">
+        </div>
+        <div class="text-half">
+            <h2>À Propos d'Oveggo</h2>
+            <p>Chez Oveggo, nous sommes passionnés par la nature et déterminés à créer des environnements extérieurs magnifiques et durables. Notre équipe de professionnels expérimentés allie créativité et expertise technique pour offrir des résultats exceptionnels, adaptés à vos besoins.</p>
+            <p>Nous croyons en la construction de relations durables avec nos clients, fondées sur la confiance, la transparence et un amour commun pour les paysages magnifiques. De la consultation initiale à la réalisation du projet, nous garantissons une expérience fluide et pleinement satisfaisante.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact-us" class="contact-section">
+        <h2>Contactez-Nous</h2>
+        <div class="contact-content">
+            <div class="contact-form">
+                <h3>Envoyez-Nous un Message</h3>
+                <form id="contact-form" action="https://formspree.io/f/xpwkaenq" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit">Envoyer le Message</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <h3>Contact Info</h3>
+                <p><strong>Address:</strong> Avenue Mohamed V n°13 étage 03 Ben guerir</p>
+                <p><strong>Email:</strong> contact@oveggo.com</p>
+                <p><strong>Tel:</strong> +212 708 08 02 02</p>
+                <div class="business-hours">
+                    <h4>Heures de travail</h4>
+                    <p>Lundi - Vendredi : 9:00 AM - 6:00 PM</p>
+                    <p>Samedi : 9:00 AM - 4:00 PM</p>
+                    <p>Dimanche : Fermé</p>
+                </div>
+            </div>
+            <div class="contact-map">
+                <h3>Localisation</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3414.702617564019!2d-7.950363824388736!3d32.23267141213496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7caa1a04c3bb1%3A0x29b6b2f24f32c611!2sUniversit%C3%A9%20Mohammed%20VI%20Polytechnique%20(UM6P)!5e0!3m2!1sen!2sma!4v1731259200000!5m2!1sen!2sma" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="col">
+                <h3>Oveggo</h3>
+                <p>Créer des espaces extérieurs beaux et durables pour votre plaisir.</p>
+            </div>
+            <div class="col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about-us">À Propos</a></li>
+                    <li><a href="#contact-us">Contact</a></li>
+                    <li><a href="booking.html">Réservez</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h3>Contact</h3>
+                <p>Avenue Mohamed V n°13 étage 03 Ben guerir</p>
+                <p>contact@oveggo.com</p>
+                <p>+212 708 08 02 02</p>
+            </div>
+            <div class="col">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=100079753782140" aria-label="Facebook">
+                        <img src="images/icons/facebook.svg" alt="Facebook" width="24" height="24">
+                    </a>
+                    <a href="http://wa.me/212708080202" aria-label="Twitter">
+                        <img src="images/icons/twitter.svg" alt="Twitter" width="24" height="24">
+                    </a>
+                    <a href="https://www.instagram.com/oveggo.ma?igsh=c3o4NDI2eHp4cWkw&utm_source=qr" aria-label="Instagram">
+                        <img src="images/icons/instagram.svg" alt="Instagram" width="24" height="24">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="rights">
+            &copy; 2023 Oveggo. Tous droits réservés.
+        </div>
+    </footer>
+
+    <script src="slider.js"></script>
+    <script>
+                // Form submission handling with Formspree
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            // Show loading state
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+            
+            try {
+                const formData = new FormData(form);
+                
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Success message
+                    showNotification('Thank you for your message! We will get back to you soon.', 'success');
+                    form.reset();
+                } else {
+                    // Error from Formspree
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Form submission failed');
+                }
+            } catch (error) {
+                // Network error or other issues
+                showNotification('There was a problem sending your message. Please try again or contact us directly at contact@oveggo.com.', 'error');
+                console.error('Form submission error:', error);
+            } finally {
+                // Restore button state
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }
+        });
+
+        // Notification function
+        function showNotification(message, type) {
+            // Remove existing notifications
+            const existingNotification = document.querySelector('.form-notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `form-notification ${type}`;
+            notification.textContent = message;
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 5000);
+        }
+        // Form submission handling
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
+    <script>
+    // Quand l'utilisateur fait défiler la page header rest en blanc
+    window.addEventListener("scroll", function() {
+        const header = document.querySelector(".header");
+        // Si on descend de plus de 50px → ajoute la classe "scrolled"
+        header.classList.toggle("scrolled", window.scrollY > 50);
+    });
+    </script>
+</body>
+</html>

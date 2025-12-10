@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Consultation - Oveggo</title>
+    <link rel="icon" type="image/x-icon" href="images/branding/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: 500;
+            z-index: 10000;
+            max-width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .booking-notification.success {
+            background: #4CAF50;
+        }
+        
+        .booking-notification.error {
+            background: #f44336;
+        }
+        
+        .loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .booking-page {
+                margin: 80px 20px 30px;
+                padding: 20px;
+            }
+            
+            .booking-notification {
+                top: 80px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+        }
+    </style>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html" >
+                        <img src="images/branding/logo3.svg" alt="Oveggo" width="150" height="50">
+                    </a>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Acceuil</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#about-us">À Propos</a></li>
+                    <li><a href="index.html#contact-us">Contact</a></li>
+                    <li><a href="booking.html" class="book-now">Réservez</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+            <!-- Ajoutez cette section après le header existant dans booking.html -->
+        <div class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="index.html">Acceuil</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#about-us">À Propos</a></li>
+                <li><a href="index.html#contact-us">Contact</a></li>
+                <li><a href="booking.html" class="book-now">Réservez</a></li>
+            </ul>
+        </div>
+
+    <!-- Booking Page Content -->
+    <main>
+        <section class="booking-page">
+            <h2>Réservez votre consultation</h2>
+            <p>Planifiez une visite de nos experts à votre convenance.</p>
+            <form class="booking-form" id="booking-form">
+                <div class="form-group">
+                    <label for="booking-name">Nom complet</label>
+                    <input type="text" id="booking-name" name="name" placeholder="Votre nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="booking-email">Email</label>
+                    <input type="email" id="booking-email" name="email" placeholder="Votre email" required>
+                </div>
+                <div class="form-group">
+                    <label for="booking-phone">Téléphone</label>
+                    <input type="tel" id="booking-phone" name="phone" placeholder="Votre numéro de téléphone" required>
+                </div>
+                <div class="form-group">
+                    <label for="booking-address">Adresse</label>
+                    <input type="text" id="booking-address" name="address" placeholder="Votre adresse" required>
+                </div>
+                <div class="form-group">
+                    <label for="booking-service">Type de service</label>
+                    <select id="booking-service" name="service" required>
+                        <option value="">Sélectionnez un service</option>
+                        <option value="gardening-landscaping">Jardinage et Aménagement Paysager</option>
+                        <option value="cleaning">Nettoyage { Extérieur ou Interieur }</option>
+                        <option value="agriculture">Services Agricoles</option>
+                        <option value="consultation">Consultation Initiale</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="booking-details">Détails du projet</label>
+                    <textarea id="booking-details" name="project_details" placeholder="Décrivez brièvement votre projet..." rows="4"></textarea>
+                </div>
+                <div class="form-group datetime-group">
+                    <div>
+                        <label for="booking-date">Date souhaitée</label>
+                        <input type="date" id="booking-date" name="preferred_date" required>
+                    </div>
+                    <!-- <div>
+                        <label for="booking-time">Heure souhaitée</label>
+                        <input type="time" id="booking-time" name="preferred_time" required>
+                    </div> -->
+                     <div>
+                        <label for="booking-time">Heure souhaitée</label>
+                        <select id="booking-time" name="preferred_time" required>
+                            <option value="">Sélectionnez une heure</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="booking-urgency">Urgence du projet</label>
+                    <select id="booking-urgency" name="urgency">
+                        <option value="normal">Normal (Dans les 2-3 semaines)</option>
+                        <option value="urgent">Urgent (Dans la semaine)</option>
+                        <option value="asap">Dès que possible</option>
+                    </select>
+                </div>
+                <button type="submit">Soumettre la réservation</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="col">
+                <h3>Oveggo</h3>
+                <p>Créer des espaces extérieurs beaux et durables pour votre plaisir.</p>
+            </div>
+            <div class="col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about-us">À Propos</a></li>
+                    <li><a href="#contact-us">Contact</a></li>
+                    <li><a href="booking.html">Réservez</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h3>Contact</h3>
+                <p>Avenue Mohamed V n°13 étage 03 Ben guerir</p>
+                <p>contact@oveggo.com</p>
+                <p>+212 708 08 02 02</p>
+            </div>
+            <div class="col">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=100079753782140" aria-label="Facebook">
+                        <img src="images/icons/facebook.svg" alt="Facebook" width="24" height="24">
+                    </a>
+                    <a href="http://wa.me/212708080202" aria-label="Twitter">
+                        <img src="images/icons/twitter.svg" alt="Twitter" width="24" height="24">
+                    </a>
+                    <a href="https://www.instagram.com/oveggo.ma?igsh=c3o4NDI2eHp4cWkw&utm_source=qr" aria-label="Instagram">
+                        <img src="images/icons/instagram.svg" alt="Instagram" width="24" height="24">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="rights">
+            &copy; 2023 Oveggo. Tous droits réservés.
+        </div>
+    </footer>
+
+    <script>
+        // Configuration EmailJS - À REMPLACER AVEC VOS VRAIES VALEURS
+        const EMAILJS_CONFIG = {
+            SERVICE_ID: 'service_r5oys5v', // Remplacez par votre Service ID EmailJS
+            TEMPLATE_ADMIN_ID: 'template_94q0xnd', // Template pour l'admin
+            TEMPLATE_CLIENT_ID: 'template_u4bkh76', // Template pour le client
+            PUBLIC_KEY: 'RFx1Z_7lVV0-JNwON' // Votre clé publique EmailJS
+        };
+
+        // Email de réception des réservations
+        const ADMIN_EMAIL = 'contact@oveggo.com'; // Votre email pour recevoir les réservations
+
+        // Initialisation EmailJS
+        (function() {
+            emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+        })();
+
+        document.getElementById('booking-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            // Validation de la date
+            const selectedDate = new Date(document.getElementById('booking-date').value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            if (selectedDate < today) {
+                showNotification('Veuillez sélectionner une date future.', 'error');
+                return;
+            }
+            
+            // État de chargement
+            submitButton.textContent = 'Envoi en cours...';
+            submitButton.disabled = true;
+            form.classList.add('loading');
+            
+            try {
+                // Préparer les données du formulaire
+                const formData = new FormData(form);
+                const bookingData = Object.fromEntries(formData.entries());
+                
+                // Enrichir les données pour les templates
+                const templateData = prepareTemplateData(bookingData);
+                
+                // Envoyer l'email à l'admin
+                await sendAdminEmail(templateData);
+                
+                // Envoyer l'email de confirmation au client
+                await sendClientConfirmationEmail(templateData);
+                
+                // Message de succès
+                showNotification('Merci pour votre réservation ! Un email de confirmation vous a été envoyé.', 'success');
+                form.reset();
+                setMinDate();
+                
+            } catch (error) {
+                console.error('Erreur d\'envoi:', error);
+                showNotification('Il y a eu un problème avec l\'envoi de votre réservation. Veuillez réessayer ou nous appeler directement.', 'error');
+            } finally {
+                // Restaurer le bouton
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                form.classList.remove('loading');
+            }
+        });
+
+        // Préparer les données pour les templates EmailJS
+        function prepareTemplateData(bookingData) {
+            const serviceNames = {
+                'gardening-landscaping': 'Jardinage et Aménagement Paysager',
+                'cleaning': 'Nettoyage Extérieur',
+                'agriculture': 'Services Agricoles',
+                'consultation': 'Consultation Initiale'
+            };
+
+            const urgencyNames = {
+                'normal': 'Normal (Dans les 2-3 semaines)',
+                'urgent': 'Urgent (Dans la semaine)',
+                'asap': 'Dès que possible'
+            };
+
+            // Formater la date en français
+            const date = new Date(bookingData.preferred_date);
+            const formattedDate = date.toLocaleDateString('fr-FR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            return {
+                name: bookingData.name,
+                email: bookingData.email,
+                phone: bookingData.phone,
+                address: bookingData.address,
+                service: bookingData.service,
+                service_name: serviceNames[bookingData.service] || bookingData.service,
+                project_details: bookingData.project_details || 'Non spécifié',
+                preferred_date: formattedDate,
+                preferred_time: bookingData.preferred_time,
+                urgency: urgencyNames[bookingData.urgency] || bookingData.urgency,
+                urgency_class: bookingData.urgency === 'urgent' || bookingData.urgency === 'asap' ? 'urgent' : '',
+                admin_email: ADMIN_EMAIL,
+                timestamp: new Date().toLocaleString('fr-FR')
+            };
+        }
+
+        // Envoyer l'email à l'admin
+        async function sendAdminEmail(templateData) {
+            try {
+                const response = await emailjs.send(
+                    EMAILJS_CONFIG.SERVICE_ID,
+                    EMAILJS_CONFIG.TEMPLATE_ADMIN_ID,
+                    {
+                        ...templateData,
+                        to_email: ADMIN_EMAIL
+                    }
+                );
+                console.log('Email admin envoyé:', response);
+                return response;
+            } catch (error) {
+                console.error('Erreur envoi email admin:', error);
+                throw error;
+            }
+        }
+
+        // Envoyer l'email de confirmation au client
+        async function sendClientConfirmationEmail(templateData) {
+            try {
+                const response = await emailjs.send(
+                    EMAILJS_CONFIG.SERVICE_ID,
+                    EMAILJS_CONFIG.TEMPLATE_CLIENT_ID,
+                    templateData
+                );
+                console.log('Email client envoyé:', response);
+                return response;
+            } catch (error) {
+                console.error('Erreur envoi email client:', error);
+                throw error;
+            }
+        }
+
+        // Fonction de notification
+        function showNotification(message, type) {
+            const existingNotification = document.querySelector('.booking-notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = `booking-notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 6000);
+        }
+
+        // Restriction des dates
+        function setMinDate() {
+            const today = new Date().toISOString().split('T')[0];
+            const dateInput = document.getElementById('booking-date');
+            dateInput.setAttribute('min', today);
+            
+            const maxDate = new Date();
+            maxDate.setFullYear(maxDate.getFullYear() + 1);
+            dateInput.setAttribute('max', maxDate.toISOString().split('T')[0]);
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            setMinDate();
+            
+            // Validation du téléphone
+            const phoneInput = document.getElementById('booking-phone');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    this.value = this.value.replace(/[^\d+\-\s\(\)]/g, '');
+                });
+            }
+            
+            // Description dynamique des services
+            const serviceSelect = document.getElementById('booking-service');
+            const detailsTextarea = document.getElementById('booking-details');
+            
+            if (serviceSelect && detailsTextarea) {
+                serviceSelect.addEventListener('change', function() {
+                    const descriptions = {
+                        'gardening-landscaping': 'Décrivez votre projet de jardinage : taille du terrain, type de plantes souhaitées, style d\'aménagement...',
+                        'cleaning': 'Décrivez les espaces à nettoyer : surface, type de salissures, accès...',
+                        'agriculture': 'Décrivez votre projet agricole : surface, type de culture, objectifs...',
+                        'consultation': 'Décrivez vos besoins pour préparer la consultation...',
+                        '': 'Décrivez brièvement votre projet...'
+                    };
+                    detailsTextarea.placeholder = descriptions[this.value] || 'Décrivez brièvement votre projet...';
+                });
+            }
+        });
+    </script>
+    <script>
+    // Quand l'utilisateur fait défiler la page
+    window.addEventListener("scroll", function() {
+        const header = document.querySelector(".header");
+        // Si on descend de plus de 50px → ajoute la classe "scrolled"
+        header.classList.toggle("scrolled", window.scrollY > 50);
+    });
+    
+    // final 
+            // Mobile menu functionality for booking page
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuOverlay = document.createElement('div');
+            
+            // Create overlay for mobile menu
+            mobileMenuOverlay.className = 'mobile-menu-overlay';
+            document.body.appendChild(mobileMenuOverlay);
+            
+            // Toggle mobile menu
+            if (mobileMenuToggle && mobileMenu) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    mobileMenuOverlay.classList.toggle('active');
+                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+                });
+                
+                // Close menu when clicking on overlay
+                mobileMenuOverlay.addEventListener('click', function() {
+                    mobileMenuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    this.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+                
+                // Close menu when clicking on menu links
+                const menuLinks = mobileMenu.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenuToggle.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        mobileMenuOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
